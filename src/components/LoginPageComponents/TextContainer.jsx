@@ -3,6 +3,7 @@ import { FaEyeSlash, FaUser } from "react-icons/fa";
 import google from "../../assets/images/google.png";
 import { useRef, useState } from "react";
 import Users from "../../hooks/Users";
+import { useNavigate } from "react-router-dom";
 
 const TextContainer = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,6 +12,7 @@ const TextContainer = () => {
   const [error, setError] = useState("");
   const emailInputRef = useRef(null);
   const passInputRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleVisibility = () => {
     setIsVisible(!isVisible);
@@ -21,6 +23,12 @@ const TextContainer = () => {
   function isFormValid(e) {
     e.preventDefault();
     let isValid = true;
+
+    const user = users.find(
+      (user) =>
+        user.email === emailInputRef.current.value &&
+        user.password === passInputRef.current.value,
+    );
 
     if (
       emailInputRef.current.value === "" &&
@@ -34,15 +42,7 @@ const TextContainer = () => {
     } else if (passInputRef.current.value === "") {
       setError("Please enter your password.");
       isValid = false;
-    }
-
-    const user = users.find(
-      (user) =>
-        user.email === emailInputRef.current.value &&
-        user.password === passInputRef.current.value,
-    );
-
-    if (!user) {
+    } else if (!user) {
       setError("Incorrect email or password.");
       isValid = false;
     } else {
@@ -51,6 +51,13 @@ const TextContainer = () => {
 
     return isValid;
   }
+
+  const handleLoginClick = (e) => {
+    e.preventDefault();
+    if (isFormValid(e)) {
+      navigate("/home");
+    }
+  };
 
   return (
     <div
@@ -88,11 +95,12 @@ const TextContainer = () => {
         </div>
 
         <div id="submitBtn">
-          <a href="/">
-            <button className="bg-myBlue hover:bg-myHoverBlue w-64 rounded px-2 py-1 font-normal text-white transition-all duration-300">
-              Login
-            </button>
-          </a>
+          <button
+            onClick={handleLoginClick}
+            className="bg-myBlue hover:bg-myHoverBlue w-64 rounded px-2 py-1 font-normal text-white transition-all duration-300"
+          >
+            Login
+          </button>
         </div>
       </form>
 
