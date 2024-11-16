@@ -4,7 +4,10 @@ import electionWallpaper from "../../assets/images/login-wallpaper.jpg";
 
 const LoginContainer = () => {
   return (
-    <div className="shadow-3xl flex h-4/6 w-3/6 items-center justify-center rounded">
+    <div
+      id="loginContainer"
+      className="shadow-3xl flex h-full w-full flex-col-reverse items-center justify-center rounded md:h-4/6 md:flex-row xl:w-4/6 2xl:w-3/6"
+    >
       <TextContainer />
       <ImgContainer src={electionWallpaper} alt="Election Wallpaper" />
     </div>

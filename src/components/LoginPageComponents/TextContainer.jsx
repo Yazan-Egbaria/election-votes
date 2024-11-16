@@ -40,7 +40,10 @@ const TextContainer = () => {
   }
 
   return (
-    <div className="flex h-full w-[50%] flex-col items-center justify-center gap-8">
+    <div
+      id="textContainer"
+      className="flex h-1/2 w-full flex-col items-center justify-center gap-8 md:w-1/2"
+    >
       <h1 className="text-myBlue text-2xl capitalize">Login to your account</h1>
 
       <form action="" className="flex flex-col gap-8" onSubmit={isFormValid}>
