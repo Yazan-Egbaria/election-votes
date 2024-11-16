@@ -2,6 +2,7 @@ import Input from "./Input";
 import { FaEyeSlash, FaUser } from "react-icons/fa";
 import google from "../../assets/images/google.png";
 import { useRef, useState } from "react";
+import Users from "../../hooks/Users";
 
 const TextContainer = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,9 +16,12 @@ const TextContainer = () => {
     setIsVisible(!isVisible);
   };
 
+  const { users } = Users();
+
   function isFormValid(e) {
     e.preventDefault();
     let isValid = true;
+
     if (
       emailInputRef.current.value === "" &&
       passInputRef.current.value === ""
@@ -32,7 +36,16 @@ const TextContainer = () => {
       isValid = false;
     }
 
-    if (isValid) {
+    const user = users.find(
+      (user) =>
+        user.email === emailInputRef.current.value &&
+        user.password === passInputRef.current.value,
+    );
+
+    if (!user) {
+      setError("Incorrect email or password.");
+      isValid = false;
+    } else {
       setError("");
     }
 
