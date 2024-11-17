@@ -6,9 +6,7 @@ const Users = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch(
-          "https://6738a9ca4eb22e24fca8988e.mockapi.io/users",
-        );
+        const response = await fetch("https://6738a9ca4eb22e24fca8988e.mockapi.io/users");
         const data = await response.json();
         setUsers(data);
       } catch (err) {
@@ -19,7 +17,7 @@ const Users = () => {
     fetchUsers();
   }, []);
 
-  return { users };
+  return users;
 };
 
 export default Users;
