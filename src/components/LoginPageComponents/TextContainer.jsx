@@ -18,7 +18,7 @@ const TextContainer = () => {
     setIsVisible(!isVisible);
   };
 
-  const { users } = Users();
+  const users = Users();
 
   function isFormValid(e) {
     e.preventDefault();
@@ -47,6 +47,7 @@ const TextContainer = () => {
       isValid = false;
     } else {
       setError("");
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
     }
 
     return isValid;
@@ -64,7 +65,7 @@ const TextContainer = () => {
       id="textContainer"
       className="flex h-1/2 w-full flex-col items-center justify-center gap-8 md:w-1/2"
     >
-      <h1 className="text-myBlue text-2xl capitalize">Login to your account</h1>
+      <h1 className="text-2xl capitalize text-myBlue">Login to your account</h1>
 
       <form action="" className="flex flex-col gap-8" onSubmit={isFormValid}>
         <div className="flex flex-col gap-2">
@@ -97,7 +98,7 @@ const TextContainer = () => {
         <div id="submitBtn">
           <button
             onClick={handleLoginClick}
-            className="bg-myBlue hover:bg-myHoverBlue w-64 rounded px-2 py-1 font-normal text-white transition-all duration-300"
+            className="w-64 rounded bg-myBlue px-2 py-1 font-normal text-white transition-all duration-300 hover:bg-myHoverBlue"
           >
             Login
           </button>
@@ -108,7 +109,7 @@ const TextContainer = () => {
 
       <div id="loginWithGoogle">
         <a href="/">
-          <button className="border-myBlue text-myBlue flex w-64 items-center justify-center gap-2 rounded border px-2 py-1 transition-all duration-300 hover:shadow">
+          <button className="flex w-64 items-center justify-center gap-2 rounded border border-myBlue px-2 py-1 text-myBlue transition-all duration-300 hover:shadow">
             Sign In With <img className="w-5" src={google} alt="Google" />
           </button>
         </a>
